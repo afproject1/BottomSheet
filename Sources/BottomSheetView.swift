@@ -98,13 +98,6 @@ public final class BottomSheetView: UIView {
         return useSafeAreaInsets ? .safeAreaBottomInset : 0
     }
 
-    private lazy var handleView: HandleView = {
-        let view = HandleView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.delegate = self
-        return view
-    }()
-
     private lazy var dimView: UIView = {
         let view = UIView(frame: .zero)
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -292,7 +285,7 @@ public final class BottomSheetView: UIView {
         layer.shadowOffset = .zero
         layer.shadowRadius = 3
         layer.rasterizationScale = UIScreen.main.scale
-        layer.cornerRadius = 16
+        layer.cornerRadius = 10
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 
         let handleBackgroundView = handleBackground.view
@@ -302,7 +295,6 @@ public final class BottomSheetView: UIView {
 
         addSubview(contentView)
         addSubview(handleBackgroundView)
-        addSubview(handleView)
 
         handleBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -313,12 +305,7 @@ public final class BottomSheetView: UIView {
             handleBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             handleBackgroundView.heightAnchor.constraint(equalToConstant: .handleHeight),
 
-            handleView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            handleView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            handleView.widthAnchor.constraint(equalToConstant: 25),
-            handleView.heightAnchor.constraint(equalToConstant: 4),
-
-            contentView.topAnchor.constraint(equalTo: handleView.bottomAnchor, constant: 8),
+            contentView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
         ]
